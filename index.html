@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>🎭 人类采访问卷 - 抽卡程序</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎴</text></svg>">
+</head>
+<body>
+  <div class="app-container">
+    <!-- 主页面 -->
+    <main id="main-page" class="page active">
+      <header class="header">
+        <h1 class="title">🎭 人类采访问卷</h1>
+        <p class="subtitle">✨ 请助力我捏出活人感的小情侣……！</p>
+      </header>
+
+      <section class="intro-section">
+        <div class="intro-card">
+          <h2>📋 回答方向</h2>
+          <p>感受到的情感/感觉对自身带来的影响/境遇下自己实际做的确切的反应和事情之类的（如果能有比较详细的行动/语言/应对思路会更好……）也就是如果有"真的这样做过"的经历可以分享会比笼统的怎么做好一些。</p>
+          <p class="tip">💡 and如果有其他男性？朋友或者性别相关的一些tip也可以加……因为确实不了解。。类似从整个性别角度的了解角度上比如"所认知的其他男性可能如何看待/如何去做"</p>
+          <p class="notice">🔒 所有信息都不会外传（当然也没有地方外传所以请放心），也不会直接沿用搬照设定写故事……大概是作为如何塑造角色的参考方式。。</p>
+        </div>
+      </section>
+
+      <section class="categories-section">
+        <h2 class="section-title">🎴 选择问卷分类</h2>
+        <div class="categories-grid" id="categories-grid">
+          <!-- 分类卡片将通过JS动态生成 -->
+        </div>
+      </section>
+
+      <button class="random-all-btn" id="random-all-btn">
+        🎲 随机抽取全部问题
+      </button>
+    </main>
+
+    <!-- 抽卡页面 -->
+    <div id="draw-page" class="page">
+      <header class="draw-header">
+        <button class="back-btn" id="back-btn">← 返回</button>
+        <h2 class="category-title" id="category-title">分类名称</h2>
+      </header>
+
+      <aside class="hint-card">
+        <p>📌 <strong>简述：</strong>情感，影响，过去实际做出的反应，所认知的大部分"男性"会怎么处理</p>
+      </aside>
+
+      <div class="draw-area">
+        <div class="card-container" id="card-container">
+          <div class="card" id="card">
+            <div class="card-front">
+              <span class="card-emoji">🎴</span>
+              <span class="card-text">点击抽卡</span>
+            </div>
+            <div class="card-back">
+              <p class="question-text" id="question-text">问题内容</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="action-buttons">
+        <button class="action-btn redraw-btn" id="redraw-btn">
+          🔄 重新抽取
+        </button>
+        <button class="action-btn answer-btn" id="answer-btn">
+          📋 复制问题
+        </button>
+      </div>
+
+      <div class="toast" id="toast">✅ 已复制到剪贴板！</div>
+    </div>
+  </div>
+
+  <script src="questions.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
