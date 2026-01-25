@@ -46,20 +46,20 @@ class CardDrawApp {
 
   renderCategories() {
     const html = QUESTIONS_DATA.categories.map(cat => `
-      <div class="category-card" 
+      <button type="button" class="category-card" 
            data-category-id="${cat.id}" 
            style="--category-color: ${cat.color}">
         <span class="category-emoji">${cat.emoji}</span>
         <span class="category-name">${cat.name}</span>
         <span class="category-count">${cat.questions.length} 个问题</span>
-      </div>
+      </button>
     `).join('');
     
     this.categoriesGrid.innerHTML = html;
   }
 
   bindEvents() {
-    // 分类卡片点击
+    // 分类卡片点击 - 直接使用click，移动端也支持
     this.categoriesGrid.addEventListener('click', (e) => {
       const card = e.target.closest('.category-card');
       if (card) {

@@ -39,34 +39,15 @@ body {
   margin: 0 auto;
   padding: 20px;
   min-height: 100vh;
-  position: relative;
-  overflow: hidden;
 }
 
 /* 📄 页面切换 */
 .page {
   display: none;
-  visibility: hidden;
-  opacity: 0;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  pointer-events: none;
 }
 
 .page.active {
   display: block;
-  visibility: visible;
-  opacity: 1;
-  position: relative;
-  pointer-events: auto;
-  animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
 }
 
 /* 🎭 头部样式 */
@@ -147,19 +128,22 @@ body {
 }
 
 .category-card {
+  display: block;
+  width: 100%;
   background: var(--bg-card);
   border-radius: var(--radius);
   padding: 24px 16px;
   text-align: center;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background 0.2s ease, border-color 0.2s ease;
   border: 2px solid transparent;
   box-shadow: var(--shadow);
   position: relative;
   -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation;
-  user-select: none;
-  -webkit-user-select: none;
+  -webkit-appearance: none;
+  appearance: none;
+  font-family: inherit;
+  color: inherit;
 }
 
 /* 只在非触摸设备上启用hover效果 */
@@ -172,20 +156,14 @@ body {
 }
 
 .category-card:active {
-  transform: scale(0.98);
   background: var(--bg-card-hover);
+  border-color: var(--category-color, var(--primary));
 }
 
 .category-emoji {
   font-size: 2.5rem;
   display: block;
   margin-bottom: 12px;
-  pointer-events: none;
-}
-
-.category-name,
-.category-count {
-  pointer-events: none;
 }
 
 .category-name {
@@ -303,8 +281,7 @@ body {
   transform: rotateY(180deg);
 }
 
-/* 只在页面激活时才运行抽卡动画 */
-.page.active .card.drawing {
+.card.drawing {
   animation: cardDraw 0.8s ease;
 }
 
@@ -348,14 +325,16 @@ body {
   margin-bottom: 16px;
 }
 
-/* 只在抽卡页面激活时才运行浮动动画 */
-.page.active .card-front .card-emoji {
-  animation: float 3s ease-in-out infinite;
-}
+/* 抽卡页面的卡片emoji浮动动画 - 仅PC */
+@media (hover: hover) and (pointer: fine) {
+  .card-front .card-emoji {
+    animation: float 3s ease-in-out infinite;
+  }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
 }
 
 .card-text {
@@ -520,31 +499,30 @@ body {
   }
 }
 
-/* ✨ 额外动画效果 */
-@keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-}
-
-.category-card::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.1),
-    transparent
-  );
-  background-size: 200% 100%;
-  border-radius: var(--radius);
-  opacity: 0;
-  transition: opacity 0.3s;
-  pointer-events: none;
-}
-
-/* 只在非触摸设备上启用hover动画 */
+/* ✨ 额外动画效果 - 仅PC端 */
 @media (hover: hover) and (pointer: fine) {
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  .category-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.1),
+      transparent
+    );
+    background-size: 200% 100%;
+    border-radius: var(--radius);
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+  }
+
   .category-card:hover::after {
     opacity: 1;
     animation: shimmer 1.5s infinite;
