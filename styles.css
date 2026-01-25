@@ -142,6 +142,7 @@ body {
   transition: all 0.3s ease;
   border: 2px solid transparent;
   box-shadow: var(--shadow);
+  position: relative;
 }
 
 .category-card:hover {
@@ -311,6 +312,9 @@ body {
 .card-emoji {
   font-size: 5rem;
   margin-bottom: 16px;
+}
+
+.card-front .card-emoji {
   animation: float 3s ease-in-out infinite;
 }
 
@@ -499,6 +503,7 @@ body {
   border-radius: var(--radius);
   opacity: 0;
   transition: opacity 0.3s;
+  pointer-events: none;
 }
 
 .category-card:hover::after {
