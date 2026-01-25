@@ -143,16 +143,24 @@ body {
   border: 2px solid transparent;
   box-shadow: var(--shadow);
   position: relative;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
-.category-card:hover {
-  background: var(--bg-card-hover);
-  transform: translateY(-4px);
-  border-color: var(--category-color, var(--primary));
+/* 只在非触摸设备上启用hover效果 */
+@media (hover: hover) and (pointer: fine) {
+  .category-card:hover {
+    background: var(--bg-card-hover);
+    transform: translateY(-4px);
+    border-color: var(--category-color, var(--primary));
+  }
 }
 
 .category-card:active {
   transform: scale(0.98);
+  background: var(--bg-card-hover);
 }
 
 .category-emoji {
@@ -189,6 +197,8 @@ body {
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(244, 114, 182, 0.4);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .random-all-btn:hover {
@@ -217,6 +227,8 @@ body {
   cursor: pointer;
   font-size: 0.9rem;
   transition: all 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .back-btn:hover {
@@ -256,6 +268,8 @@ body {
   width: 280px;
   height: 380px;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .card {
@@ -361,6 +375,8 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .redraw-btn {
@@ -506,9 +522,12 @@ body {
   pointer-events: none;
 }
 
-.category-card:hover::after {
-  opacity: 1;
-  animation: shimmer 1.5s infinite;
+/* 只在非触摸设备上启用hover动画 */
+@media (hover: hover) and (pointer: fine) {
+  .category-card:hover::after {
+    opacity: 1;
+    animation: shimmer 1.5s infinite;
+  }
 }
 
 /* 🌟 滚动条美化 */
