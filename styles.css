@@ -44,20 +44,11 @@ body {
 /* 📄 页面切换 */
 .page {
   display: none;
-  visibility: hidden;
-  pointer-events: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  animation: fadeIn 0.3s ease;
 }
 
 .page.active {
   display: block;
-  visibility: visible;
-  pointer-events: auto;
-  position: relative;
-  animation: fadeIn 0.3s ease;
 }
 
 @keyframes fadeIn {
@@ -143,12 +134,14 @@ body {
 }
 
 .category-card {
+  display: block;
+  width: 100%;
   background: var(--bg-card);
   border-radius: var(--radius);
   padding: 24px 16px;
   text-align: center;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
   border: 2px solid transparent;
   box-shadow: var(--shadow);
   position: relative;
@@ -156,6 +149,10 @@ body {
   touch-action: manipulation;
   user-select: none;
   -webkit-user-select: none;
+  font-family: inherit;
+  color: inherit;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 /* 只在非触摸设备上启用hover效果 */
@@ -176,6 +173,12 @@ body {
   font-size: 2.5rem;
   display: block;
   margin-bottom: 12px;
+  pointer-events: none;
+}
+
+.category-name,
+.category-count {
+  pointer-events: none;
 }
 
 .category-name {
@@ -337,7 +340,7 @@ body {
   margin-bottom: 16px;
 }
 
-.page.active .card-front .card-emoji {
+.card-front .card-emoji {
   animation: float 3s ease-in-out infinite;
 }
 
@@ -508,35 +511,7 @@ body {
   }
 }
 
-/* ✨ 额外动画效果 - 仅限PC端 */
-@media (hover: hover) and (pointer: fine) {
-  @keyframes shimmer {
-    0% { background-position: -200% 0; }
-    100% { background-position: 200% 0; }
-  }
-
-  .category-card::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.1),
-      transparent
-    );
-    background-size: 200% 100%;
-    border-radius: var(--radius);
-    opacity: 0;
-    transition: opacity 0.3s;
-    pointer-events: none;
-  }
-
-  .category-card:hover::after {
-    opacity: 1;
-    animation: shimmer 1.5s infinite;
-  }
-}
+/* 移除了shimmer动画，避免移动端bug */
 
 /* 🌟 滚动条美化 */
 ::-webkit-scrollbar {

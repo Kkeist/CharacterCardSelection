@@ -46,75 +46,59 @@ class CardDrawApp {
 
   renderCategories() {
     const html = QUESTIONS_DATA.categories.map(cat => `
-      <div class="category-card" 
+      <button type="button" class="category-card" 
            data-category-id="${cat.id}" 
            style="--category-color: ${cat.color}">
         <span class="category-emoji">${cat.emoji}</span>
         <span class="category-name">${cat.name}</span>
         <span class="category-count">${cat.questions.length} 个问题</span>
-      </div>
+      </button>
     `).join('');
     
     this.categoriesGrid.innerHTML = html;
   }
 
   bindEvents() {
-    // 通用的点击/触摸处理函数
-    const addTapListener = (element, handler) => {
-      let touchStartY = 0;
-      let touchStartX = 0;
-      
-      element.addEventListener('touchstart', (e) => {
-        touchStartY = e.touches[0].clientY;
-        touchStartX = e.touches[0].clientX;
-      }, { passive: true });
-      
-      element.addEventListener('touchend', (e) => {
-        const touchEndY = e.changedTouches[0].clientY;
-        const touchEndX = e.changedTouches[0].clientX;
-        // 只有当没有滑动时才触发点击
-        if (Math.abs(touchEndY - touchStartY) < 10 && Math.abs(touchEndX - touchStartX) < 10) {
-          e.preventDefault();
-          handler(e);
-        }
-      });
-      
-      element.addEventListener('click', handler);
-    };
-
-    // 分类卡片点击
-    addTapListener(this.categoriesGrid, (e) => {
+    // 分类卡片点击 - 直接使用click，移动端也能正常工作
+    this.categoriesGrid.addEventListener('click', (e) => {
       const card = e.target.closest('.category-card');
       if (card) {
+        e.preventDefault();
+        e.stopPropagation();
         const categoryId = card.dataset.categoryId;
         this.openCategory(categoryId);
       }
     });
 
     // 随机全部按钮
-    addTapListener(this.randomAllBtn, () => {
+    this.randomAllBtn.addEventListener('click', (e) => {
+      e.preventDefault();
       this.openRandomAll();
     });
 
     // 返回按钮
-    addTapListener(this.backBtn, () => {
+    this.backBtn.addEventListener('click', (e) => {
+      e.preventDefault();
       this.goBack();
     });
 
     // 卡片点击翻转
-    addTapListener(this.card, () => {
+    this.card.addEventListener('click', (e) => {
+      e.preventDefault();
       if (!this.isFlipped) {
         this.flipCard();
       }
     });
 
     // 重新抽取
-    addTapListener(this.redrawBtn, () => {
+    this.redrawBtn.addEventListener('click', (e) => {
+      e.preventDefault();
       this.drawNewCard();
     });
 
     // 复制问题
-    addTapListener(this.answerBtn, () => {
+    this.answerBtn.addEventListener('click', (e) => {
+      e.preventDefault();
       this.copyQuestion();
     });
 
