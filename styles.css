@@ -39,16 +39,29 @@ body {
   margin: 0 auto;
   padding: 20px;
   min-height: 100vh;
+  position: relative;
+  overflow: hidden;
 }
 
 /* 📄 页面切换 */
 .page {
   display: none;
-  animation: fadeIn 0.3s ease;
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
 }
 
 .page.active {
   display: block;
+  visibility: visible;
+  opacity: 1;
+  position: relative;
+  pointer-events: auto;
+  animation: fadeIn 0.3s ease;
 }
 
 @keyframes fadeIn {
@@ -167,6 +180,12 @@ body {
   font-size: 2.5rem;
   display: block;
   margin-bottom: 12px;
+  pointer-events: none;
+}
+
+.category-name,
+.category-count {
+  pointer-events: none;
 }
 
 .category-name {
@@ -284,7 +303,8 @@ body {
   transform: rotateY(180deg);
 }
 
-.card.drawing {
+/* 只在页面激活时才运行抽卡动画 */
+.page.active .card.drawing {
   animation: cardDraw 0.8s ease;
 }
 
@@ -328,7 +348,8 @@ body {
   margin-bottom: 16px;
 }
 
-.card-front .card-emoji {
+/* 只在抽卡页面激活时才运行浮动动画 */
+.page.active .card-front .card-emoji {
   animation: float 3s ease-in-out infinite;
 }
 
