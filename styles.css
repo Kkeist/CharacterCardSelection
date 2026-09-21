@@ -1,287 +1,286 @@
-/* 🎨 基础变量和重置 */
+/* ===================================================
+   🎭 人类采访问卷 · 极简质朴白风格
+   Clean, Minimalist, Paper-like Aesthetic
+   =================================================== */
+
 :root {
-  --primary: #6366f1;
-  --primary-dark: #4f46e5;
-  --bg: #0f0f1a;
-  --bg-card: #1a1a2e;
-  --bg-card-hover: #252542;
-  --text: #e2e8f0;
-  --text-muted: #94a3b8;
-  --accent: #f472b6;
-  --success: #10b981;
-  --shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-  --radius: 16px;
-  --radius-sm: 10px;
+  /* 基础配色：纸白极简体系 */
+  --bg: #f8f9fa;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f3f4f6;
+  --bg-subtle: #f3f4f6;
+  
+  --border: #e5e7eb;
+  --border-light: #f3f4f6;
+  --border-dark: #d1d5db;
+  
+  --text: #1f2937;
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
+  --text-muted: #6b7280;
+  --text-light: #9ca3af;
+  
+  --accent: #111827; /* 沉稳黑 */
+  --accent-hover: #374151;
+  --primary: #2563eb;
+  
+  --radius: 12px;
+  --radius-sm: 8px;
+  --radius-round: 9999px;
+  
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+  --shadow-card: 0 4px 16px rgba(0, 0, 0, 0.06);
 }
 
+/* 全局重置 */
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  font-size: 16px;
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
-  background: var(--bg);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+  background-color: var(--bg);
   color: var(--text);
-  min-height: 100vh;
   line-height: 1.6;
+  min-height: 100vh;
+  padding: 24px 16px;
   -webkit-font-smoothing: antialiased;
 }
 
-/* 📱 App容器 */
+/* 容器居中 */
 .app-container {
-  max-width: 800px;
+  max-width: 700px;
   margin: 0 auto;
-  padding: 20px;
-  min-height: 100vh;
 }
 
-/* 📄 页面切换 */
+/* 页面切换 */
 .page {
   display: none;
-  animation: fadeIn 0.3s ease;
 }
 
 .page.active {
   display: block;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* 🎭 头部样式 */
+/* 头部设计 - 质朴克制 */
 .header {
   text-align: center;
-  padding: 30px 0;
+  margin-bottom: 24px;
+  padding: 10px 0;
 }
 
 .title {
-  font-size: 2rem;
-  background: linear-gradient(135deg, #f472b6, #8b5cf6, #6366f1);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: 10px;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
 }
 
 .subtitle {
-  color: var(--text-muted);
-  font-size: 1rem;
-}
-
-/* 📋 介绍卡片 */
-.intro-section {
-  margin-bottom: 30px;
-}
-
-.intro-card {
-  background: var(--bg-card);
-  border-radius: var(--radius);
-  padding: 24px;
-  box-shadow: var(--shadow);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.intro-card h2 {
-  font-size: 1.2rem;
-  margin-bottom: 16px;
-  color: var(--accent);
-}
-
-.intro-card p {
-  margin-bottom: 12px;
   font-size: 0.95rem;
   color: var(--text-muted);
 }
 
+/* 引导说明区域 */
+.intro-section {
+  margin-bottom: 28px;
+}
+
+.intro-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  box-shadow: var(--shadow-sm);
+}
+
+.intro-card h2 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.intro-card p {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin-bottom: 12px;
+}
+
 .intro-card .tip {
-  background: rgba(99, 102, 241, 0.1);
-  padding: 12px 16px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-left: 3px solid #64748b;
   border-radius: var(--radius-sm);
-  border-left: 3px solid var(--primary);
+  padding: 12px 14px;
 }
 
 .intro-card .notice {
-  background: rgba(16, 185, 129, 0.1);
-  padding: 12px 16px;
+  background: #fafaf9;
+  border: 1px solid #e7e5e4;
+  border-left: 3px solid #78716c;
   border-radius: var(--radius-sm);
-  border-left: 3px solid var(--success);
+  padding: 12px 14px;
   margin-bottom: 0;
 }
 
-/* 🎴 分类区域 */
+/* 分类选择区域 */
 .categories-section {
-  margin-bottom: 30px;
+  margin-bottom: 24px;
 }
 
 .section-title {
-  font-size: 1.3rem;
-  margin-bottom: 20px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 16px;
   text-align: center;
 }
 
 .categories-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+  gap: 12px;
 }
 
 .category-card {
-  display: block;
-  width: 100%;
   background: var(--bg-card);
+  border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 24px 16px;
+  padding: 20px 12px;
   text-align: center;
   cursor: pointer;
-  transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
-  border: 2px solid transparent;
-  box-shadow: var(--shadow);
-  position: relative;
-  -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation;
-  user-select: none;
-  -webkit-user-select: none;
+  transition: all 0.15s ease;
+  box-shadow: var(--shadow-sm);
   font-family: inherit;
   color: inherit;
-  -webkit-appearance: none;
-  appearance: none;
+  width: 100%;
+  display: block;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
-/* 只在非触摸设备上启用hover效果 */
-@media (hover: hover) and (pointer: fine) {
-  .category-card:hover {
-    background: var(--bg-card-hover);
-    transform: translateY(-4px);
-    border-color: var(--category-color, var(--primary));
-  }
+.category-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-dark);
+  transform: translateY(-1px);
 }
 
 .category-card:active {
-  transform: scale(0.98);
-  background: var(--bg-card-hover);
+  transform: translateY(0);
+  background: #eef0f3;
 }
 
 .category-emoji {
-  font-size: 2.5rem;
+  font-size: 2rem;
   display: block;
-  margin-bottom: 12px;
-  pointer-events: none;
-}
-
-.category-name,
-.category-count {
-  pointer-events: none;
+  margin-bottom: 8px;
 }
 
 .category-name {
+  display: block;
   font-size: 0.95rem;
   font-weight: 600;
-  color: var(--text);
+  color: var(--text-primary);
+  margin-bottom: 4px;
 }
 
 .category-count {
   font-size: 0.8rem;
   color: var(--text-muted);
-  margin-top: 6px;
 }
 
-/* 🎲 随机全部按钮 */
+/* 随机全部按钮 */
 .random-all-btn {
   display: block;
   width: 100%;
-  max-width: 300px;
-  margin: 20px auto;
-  padding: 16px 32px;
-  font-size: 1.1rem;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border: 1px solid var(--border-dark);
+  border-radius: var(--radius);
+  padding: 14px;
+  font-size: 1rem;
   font-weight: 600;
-  color: white;
-  background: linear-gradient(135deg, #f472b6, #8b5cf6);
-  border: none;
-  border-radius: 50px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(244, 114, 182, 0.4);
-  -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.15s ease;
+  margin-bottom: 24px;
 }
 
 .random-all-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(244, 114, 182, 0.5);
+  background: var(--text-primary);
+  color: #ffffff;
+  border-color: var(--text-primary);
 }
 
-.random-all-btn:active {
-  transform: scale(0.98);
-}
-
-/* 🎴 抽卡页面 */
+/* 抽卡页面头部 */
 .draw-header {
   display: flex;
   align-items: center;
-  gap: 16px;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
+  gap: 12px;
 }
 
 .back-btn {
   background: var(--bg-card);
-  border: none;
-  color: var(--text);
-  padding: 10px 16px;
+  border: 1px solid var(--border);
   border-radius: var(--radius-sm);
-  cursor: pointer;
+  padding: 8px 14px;
   font-size: 0.9rem;
-  transition: all 0.2s ease;
-  -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s ease;
 }
 
 .back-btn:hover {
-  background: var(--bg-card-hover);
+  background: var(--bg-subtle);
+  color: var(--text-primary);
 }
 
 .category-title {
-  font-size: 1.3rem;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-primary);
   flex: 1;
 }
 
-/* 💡 提示卡片 */
+/* 思考视角便签 */
 .hint-card {
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(139, 92, 246, 0.15));
-  border-radius: var(--radius);
-  padding: 16px 20px;
-  margin-bottom: 30px;
-  border: 1px solid rgba(99, 102, 241, 0.3);
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 16px;
+  margin-bottom: 24px;
 }
 
 .hint-card p {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: var(--text-muted);
 }
 
-/* 🃏 卡片容器 */
+/* 卡片抽卡区域 */
 .draw-area {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 300px;
-  margin-bottom: 30px;
+  min-height: 380px;
+  margin-bottom: 28px;
   perspective: 1000px;
 }
 
 .card-container {
-  width: 280px;
-  height: 380px;
+  width: 320px;
+  height: 420px;
   cursor: pointer;
+  user-select: none;
   -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation;
 }
 
 .card {
@@ -289,7 +288,7 @@ body {
   height: 100%;
   position: relative;
   transform-style: preserve-3d;
-  transition: transform 0.6s ease;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .card.flipped {
@@ -297,13 +296,13 @@ body {
 }
 
 .card.drawing {
-  animation: cardDraw 0.8s ease;
+  animation: cardDraw 0.5s ease;
 }
 
 @keyframes cardDraw {
-  0% { transform: scale(0.8) rotateZ(-10deg); opacity: 0.5; }
-  50% { transform: scale(1.1) rotateZ(5deg); }
-  100% { transform: scale(1) rotateZ(0deg); opacity: 1; }
+  0% { transform: scale(0.96); opacity: 0.8; }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); opacity: 1; }
 }
 
 .card-front,
@@ -313,181 +312,151 @@ body {
   height: 100%;
   border-radius: var(--radius);
   backface-visibility: hidden;
+  box-shadow: var(--shadow-card);
+  background: #ffffff;
   display: flex;
   flex-direction: column;
+}
+
+/* 卡片正面 - 质朴素白 */
+.card-front {
   justify-content: center;
   align-items: center;
-  padding: 24px;
-  box-shadow: var(--shadow);
-}
-
-.card-front {
-  background: linear-gradient(135deg, #1a1a2e, #252542);
-  border: 3px solid var(--primary);
-}
-
-.card-front::before {
-  content: '';
-  position: absolute;
-  inset: 8px;
-  border: 2px dashed rgba(99, 102, 241, 0.3);
-  border-radius: calc(var(--radius) - 4px);
-  pointer-events: none;
+  padding: 32px 20px;
+  border: 1.5px dashed var(--border-dark);
 }
 
 .card-emoji {
-  font-size: 5rem;
-  margin-bottom: 16px;
-}
-
-.card-front .card-emoji {
-  animation: float 3s ease-in-out infinite;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  font-size: 3.5rem;
+  margin-bottom: 14px;
 }
 
 .card-text {
-  font-size: 1.1rem;
+  font-size: 0.95rem;
+  font-weight: 500;
   color: var(--text-muted);
 }
 
+/* 卡片背面 - 纯白直观 */
 .card-back {
-  background: linear-gradient(135deg, #23233f, #18182b);
-  border: 3px solid var(--accent);
   transform: rotateY(180deg);
-  text-align: left;
+  padding: 24px 22px;
   overflow-y: auto;
-  padding: 20px 18px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: stretch;
-  gap: 12px;
+  gap: 16px;
+  border: 1px solid var(--border-dark);
 }
 
-.card-tag {
-  align-self: flex-start;
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--accent);
-  background: rgba(244, 63, 94, 0.12);
-  border: 1px solid rgba(244, 63, 94, 0.3);
-  padding: 3px 10px;
-  border-radius: 20px;
-  letter-spacing: 0.5px;
-}
-
-.card-content-wrap {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+/* 问题主体容器 */
+.card-question-box {
   flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 8px 0;
 }
 
 .question-title {
-  font-size: 1.05rem;
+  font-size: 1.15rem;
   font-weight: 700;
-  line-height: 1.55;
-  color: #ffffff;
+  line-height: 1.6;
+  color: var(--text-primary);
   margin: 0;
-  letter-spacing: 0.2px;
 }
 
+/* 提示盒子 */
 .question-hint-box {
-  background: rgba(255, 255, 255, 0.04);
-  border-left: 3px solid var(--primary);
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-  padding: 10px 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  text-align: left;
 }
 
-.hint-header {
-  font-size: 0.75rem;
+.hint-label {
+  display: block;
+  font-size: 0.78rem;
   font-weight: 600;
-  color: var(--primary);
-  display: flex;
-  align-items: center;
-  gap: 4px;
+  color: var(--text-muted);
+  margin-bottom: 4px;
 }
 
 .hint-text {
-  font-size: 0.85rem;
-  line-height: 1.6;
-  color: var(--text-muted);
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
   margin: 0;
 }
 
-/* 兼容保留question-text以防万一 */
-.question-text {
-  font-size: 1rem;
-  line-height: 1.7;
-  color: var(--text);
+/* 卡片来源小注 */
+.card-source {
+  font-size: 0.78rem;
+  color: var(--text-light);
+  text-align: center;
+  min-height: 16px;
 }
 
-/* 🔘 操作按钮 */
+/* 操作按钮 */
 .action-buttons {
   display: flex;
-  gap: 16px;
+  gap: 12px;
   justify-content: center;
-  flex-wrap: wrap;
 }
 
 .action-btn {
-  padding: 14px 28px;
-  font-size: 1rem;
+  padding: 12px 24px;
+  font-size: 0.95rem;
   font-weight: 600;
-  border: none;
-  border-radius: 50px;
+  border-radius: var(--radius);
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.15s ease;
   display: flex;
   align-items: center;
-  gap: 8px;
-  -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation;
+  gap: 6px;
+  box-shadow: var(--shadow-sm);
+  font-family: inherit;
 }
 
 .redraw-btn {
   background: var(--bg-card);
-  color: var(--text);
-  border: 2px solid var(--primary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-dark);
 }
 
 .redraw-btn:hover {
-  background: var(--primary);
+  background: var(--bg-subtle);
 }
 
 .answer-btn {
-  background: linear-gradient(135deg, var(--success), #059669);
-  color: white;
-  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+  background: var(--text-primary);
+  color: #ffffff;
+  border: 1px solid var(--text-primary);
 }
 
 .answer-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
 }
 
-/* 🍞 Toast提示 */
+/* Toast 提示 */
 .toast {
   position: fixed;
-  bottom: 30px;
+  bottom: 24px;
   left: 50%;
   transform: translateX(-50%) translateY(100px);
-  background: var(--success);
-  color: white;
-  padding: 14px 28px;
-  border-radius: 50px;
-  font-weight: 600;
-  box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);
+  background: var(--text-primary);
+  color: #ffffff;
+  padding: 10px 22px;
+  border-radius: var(--radius-round);
+  font-size: 0.9rem;
+  font-weight: 500;
+  box-shadow: var(--shadow-md);
   opacity: 0;
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
   z-index: 1000;
+  pointer-events: none;
 }
 
 .toast.show {
@@ -495,105 +464,63 @@ body {
   opacity: 1;
 }
 
-/* 📱 移动端适配 */
-@media (max-width: 600px) {
-  html {
-    font-size: 14px;
-  }
+/* 极简滚动条 */
+::-webkit-scrollbar {
+  width: 5px;
+}
 
-  .app-container {
-    padding: 16px;
-  }
+::-webkit-scrollbar-track {
+  background: transparent;
+}
 
-  .header {
-    padding: 20px 0;
+::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+/* 移动端优化 */
+@media (max-width: 480px) {
+  body {
+    padding: 16px 12px;
   }
 
   .title {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
   }
 
   .categories-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+    gap: 10px;
   }
 
   .category-card {
-    padding: 20px 12px;
+    padding: 16px 10px;
   }
 
   .category-emoji {
-    font-size: 2rem;
+    font-size: 1.75rem;
   }
 
   .card-container {
-    width: 260px;
-    height: 350px;
+    width: 290px;
+    height: 380px;
   }
 
-  .card-emoji {
-    font-size: 4rem;
+  .question-title {
+    font-size: 1.05rem;
   }
 
   .action-buttons {
     flex-direction: column;
-    padding: 0 20px;
+    padding: 0 10px;
   }
 
   .action-btn {
     width: 100%;
     justify-content: center;
   }
-
-  .draw-header {
-    flex-wrap: wrap;
-  }
-
-  .category-title {
-    order: 3;
-    width: 100%;
-    text-align: center;
-    margin-top: 10px;
-  }
-}
-
-@media (max-width: 380px) {
-  .categories-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .card-container {
-    width: 240px;
-    height: 320px;
-  }
-
-  .question-text {
-    font-size: 0.9rem;
-  }
-}
-
-/* 移除了shimmer动画，避免移动端bug */
-
-/* 🌟 滚动条美化 */
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--bg);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--primary);
-  border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--primary-dark);
-}
-
-/* 💫 选中文字样式 */
-::selection {
-  background: var(--accent);
-  color: white;
 }

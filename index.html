@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>🎭 人类采访问卷 - 抽卡程序</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=2.2">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎴</text></svg>">
 </head>
 <body>
@@ -13,7 +13,7 @@
     <main id="main-page" class="page active">
       <header class="header">
         <h1 class="title">🎭 人类采访问卷</h1>
-        <p class="subtitle">✨ 自我探索与角色深度塑造 · 随机抽取与思考</p>
+        <p class="subtitle">自我探索与角色深度塑造 · 随机抽取与思考</p>
       </header>
 
       <section class="intro-section">
@@ -26,7 +26,7 @@
       </section>
 
       <section class="categories-section">
-        <h2 class="section-title">🎴 选择问卷分类</h2>
+        <h2 class="section-title">选择问卷分类</h2>
         <div class="categories-grid" id="categories-grid">
           <!-- 分类卡片将通过JS动态生成 -->
         </div>
@@ -53,17 +53,17 @@
           <div class="card" id="card">
             <div class="card-front">
               <span class="card-emoji">🎴</span>
-              <span class="card-text">点击抽卡</span>
+              <span class="card-text">点击抽取</span>
             </div>
             <div class="card-back" id="card-back">
-              <span class="card-tag" id="card-tag">🪞 分类</span>
-              <div class="card-content-wrap">
-                <h3 class="question-title" id="question-title">基础问题</h3>
-                <div class="question-hint-box" id="question-hint-box">
-                  <span class="hint-header">💡 思考提示</span>
-                  <p class="hint-text" id="hint-text">提示内容</p>
-                </div>
+              <div class="card-question-box">
+                <p class="question-title" id="question-title">基础问题</p>
               </div>
+              <div class="question-hint-box" id="question-hint-box">
+                <span class="hint-label">💡 提示 / 思考点</span>
+                <p class="hint-text" id="hint-text">提示内容</p>
+              </div>
+              <div class="card-source" id="card-source"></div>
             </div>
           </div>
         </div>
@@ -82,7 +82,7 @@
     </div>
   </div>
 
-  <script src="questions.js"></script>
-  <script src="app.js"></script>
+  <script src="questions.js?v=2.2"></script>
+  <script src="app.js?v=2.2"></script>
 </body>
 </html>

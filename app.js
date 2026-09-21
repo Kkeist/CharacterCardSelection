@@ -1,4 +1,4 @@
-// 🎴 抽卡程序主逻辑
+// 🎴 抽卡程序主逻辑 - 极简纸白风格
 
 class CardDrawApp {
   constructor() {
@@ -23,10 +23,10 @@ class CardDrawApp {
     this.categoriesGrid = document.getElementById('categories-grid');
     this.categoryTitle = document.getElementById('category-title');
     this.card = document.getElementById('card');
-    this.cardTag = document.getElementById('card-tag');
     this.questionTitle = document.getElementById('question-title');
     this.questionHintBox = document.getElementById('question-hint-box');
     this.hintText = document.getElementById('hint-text');
+    this.cardSource = document.getElementById('card-source');
     this.backBtn = document.getElementById('back-btn');
     this.redrawBtn = document.getElementById('redraw-btn');
     this.answerBtn = document.getElementById('answer-btn');
@@ -35,7 +35,6 @@ class CardDrawApp {
   }
 
   buildAllQuestions() {
-    // 构建所有问题的扁平数组，用于随机全部
     this.allQuestions = [];
     QUESTIONS_DATA.categories.forEach(cat => {
       cat.questions.forEach(q => {
@@ -52,9 +51,7 @@ class CardDrawApp {
 
   renderCategories() {
     const html = QUESTIONS_DATA.categories.map(cat => `
-      <button type="button" class="category-card" 
-           data-category-id="${cat.id}" 
-           style="--category-color: ${cat.color}">
+      <button type="button" class="category-card" data-category-id="${cat.id}">
         <span class="category-emoji">${cat.emoji}</span>
         <span class="category-name">${cat.name}</span>
         <span class="category-count">${cat.questions.length} 个问题</span>
@@ -128,7 +125,7 @@ class CardDrawApp {
     this.currentCategory = QUESTIONS_DATA.categories.find(c => c.id === categoryId);
     if (!this.currentCategory) return;
 
-    this.categoryTitle.innerHTML = `${this.currentCategory.emoji} ${this.currentCategory.name}`;
+    this.categoryTitle.textContent = `${this.currentCategory.emoji} ${this.currentCategory.name}`;
     this.switchToDrawPage();
     this.drawNewCard();
   }
@@ -136,11 +133,11 @@ class CardDrawApp {
   openRandomAll() {
     this.currentCategory = {
       id: 'all',
-      name: '随机全部',
+      name: '全部问题',
       emoji: '🎲',
       questions: this.allQuestions
     };
-    this.categoryTitle.innerHTML = '🎲 随机全部问题';
+    this.categoryTitle.textContent = '🎲 随机全部问题';
     this.switchToDrawPage();
     this.drawNewCard();
   }
@@ -157,10 +154,8 @@ class CardDrawApp {
   }
 
   drawNewCard() {
-    // 重置卡片状态
     this.resetCard();
     
-    // 随机选择问题
     const questions = this.currentCategory.questions;
     const randomIndex = Math.floor(Math.random() * questions.length);
     const selected = questions[randomIndex];
@@ -173,17 +168,17 @@ class CardDrawApp {
     if (this.currentCategory.id === 'all') {
       categoryName = selected.category;
       categoryEmoji = selected.emoji;
-      questionText = selected.question;
-      hintText = selected.hint || '';
+      questionText = typeof selected === 'object' ? selected.question : selected;
+      hintText = (typeof selected === 'object' && selected.hint) ? selected.hint : '';
     } else {
       categoryName = this.currentCategory.name;
       categoryEmoji = this.currentCategory.emoji;
-      if (typeof selected === 'string') {
-        questionText = selected;
-        hintText = '';
-      } else {
+      if (typeof selected === 'object') {
         questionText = selected.question;
         hintText = selected.hint || '';
+      } else {
+        questionText = selected;
+        hintText = '';
       }
     }
 
@@ -194,29 +189,35 @@ class CardDrawApp {
       hint: hintText
     };
 
-    // 渲染卡片内容
-    if (this.cardTag) {
-      this.cardTag.textContent = `${categoryEmoji} ${categoryName}`;
-    }
-
+    // 填充核心问题（直接呈现基础问题）
     if (this.questionTitle) {
       this.questionTitle.textContent = questionText;
     }
 
+    // 填充提示内容
     if (this.questionHintBox && this.hintText) {
-      if (hintText) {
-        this.questionHintBox.style.display = 'flex';
+      if (hintText && hintText.trim()) {
+        this.questionHintBox.style.display = 'block';
         this.hintText.textContent = hintText;
       } else {
         this.questionHintBox.style.display = 'none';
       }
     }
 
-    // 播放抽卡动画
+    // 底部轻度来源信息（仅在随机全部时显示所属分类，普通分类时不显示）
+    if (this.cardSource) {
+      if (this.currentCategory.id === 'all') {
+        this.cardSource.textContent = `所属分类 · ${categoryEmoji} ${categoryName}`;
+      } else {
+        this.cardSource.textContent = '';
+      }
+    }
+
+    // 抽卡轻动画
     this.card.classList.add('drawing');
     setTimeout(() => {
       this.card.classList.remove('drawing');
-    }, 800);
+    }, 500);
   }
 
   flipCard() {
@@ -232,16 +233,19 @@ class CardDrawApp {
   async copyQuestion() {
     if (!this.currentQuestion) return;
 
-    let textToCopy = `【${this.currentQuestion.categoryEmoji} ${this.currentQuestion.categoryName}】\n问题：${this.currentQuestion.question}`;
+    let textToCopy = '';
+    if (this.currentCategory.id === 'all') {
+      textToCopy += `【${this.currentQuestion.categoryEmoji} ${this.currentQuestion.categoryName}】\n`;
+    }
+    textToCopy += `问题：${this.currentQuestion.question}`;
     if (this.currentQuestion.hint) {
-      textToCopy += `\n💡 提示：${this.currentQuestion.hint}`;
+      textToCopy += `\n提示：${this.currentQuestion.hint}`;
     }
 
     try {
       await navigator.clipboard.writeText(textToCopy);
-      this.showToast('✅ 已复制到剪贴板！');
+      this.showToast('已复制到剪贴板');
     } catch (err) {
-      // 降级方案：创建临时textarea
       const textarea = document.createElement('textarea');
       textarea.value = textToCopy;
       textarea.style.position = 'fixed';
@@ -250,7 +254,7 @@ class CardDrawApp {
       textarea.select();
       document.execCommand('copy');
       document.body.removeChild(textarea);
-      this.showToast('✅ 已复制到剪贴板！');
+      this.showToast('已复制到剪贴板');
     }
   }
 
@@ -264,7 +268,7 @@ class CardDrawApp {
   }
 }
 
-// 🚀 启动应用
+// 启动应用
 document.addEventListener('DOMContentLoaded', () => {
   new CardDrawApp();
 });
