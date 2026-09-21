@@ -1,6 +1,7 @@
 /* ===================================================
    🎭 人类采访问卷 · 极简质朴白风格
    Clean, Minimalist, Paper-like Aesthetic
+   Enhanced Mobile Adaptation
    =================================================== */
 
 :root {
@@ -34,11 +35,16 @@
   --shadow-card: 0 4px 16px rgba(0, 0, 0, 0.06);
 }
 
-/* 全局重置 */
+/* 全局重置与移动端平滑渲染 */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -47,14 +53,18 @@ body {
   color: var(--text);
   line-height: 1.6;
   min-height: 100vh;
-  padding: 24px 16px;
+  min-height: 100dvh;
+  padding: 20px 16px;
+  padding-bottom: max(32px, env(safe-area-inset-bottom, 32px));
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* 容器居中 */
+/* 容器居中与自适应 */
 .app-container {
-  max-width: 700px;
+  max-width: 680px;
   margin: 0 auto;
+  width: 100%;
 }
 
 /* 页面切换 */
@@ -70,7 +80,7 @@ body {
 .header {
   text-align: center;
   margin-bottom: 24px;
-  padding: 10px 0;
+  padding: 8px 0;
 }
 
 .title {
@@ -88,7 +98,7 @@ body {
 
 /* 引导说明区域 */
 .intro-section {
-  margin-bottom: 28px;
+  margin-bottom: 24px;
 }
 
 .intro-card {
@@ -127,7 +137,20 @@ body {
   border-left: 3px solid #78716c;
   border-radius: var(--radius-sm);
   padding: 12px 14px;
+  margin-bottom: 12px;
+}
+
+/* 作者注 - 诚恳温和的浅色便签 */
+.intro-card .author-note {
+  background: #fdfaf6;
+  border: 1px solid #f2e9dc;
+  border-left: 3px solid #d97706;
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-size: 0.88rem;
+  color: #78350f;
   margin-bottom: 0;
+  line-height: 1.55;
 }
 
 /* 分类选择区域 */
@@ -139,7 +162,7 @@ body {
   font-size: 1.1rem;
   font-weight: 600;
   color: var(--text-primary);
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   text-align: center;
 }
 
@@ -163,7 +186,7 @@ body {
   width: 100%;
   display: block;
   user-select: none;
-  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .category-card:hover {
@@ -173,7 +196,7 @@ body {
 }
 
 .category-card:active {
-  transform: translateY(0);
+  transform: scale(0.98);
   background: #eef0f3;
 }
 
@@ -211,6 +234,7 @@ body {
   box-shadow: var(--shadow-sm);
   transition: all 0.15s ease;
   margin-bottom: 24px;
+  touch-action: manipulation;
 }
 
 .random-all-btn:hover {
@@ -219,11 +243,15 @@ body {
   border-color: var(--text-primary);
 }
 
+.random-all-btn:active {
+  transform: scale(0.99);
+}
+
 /* 抽卡页面头部 */
 .draw-header {
   display: flex;
   align-items: center;
-  margin-bottom: 18px;
+  margin-bottom: 16px;
   gap: 12px;
 }
 
@@ -237,11 +265,16 @@ body {
   color: var(--text-secondary);
   cursor: pointer;
   transition: all 0.15s ease;
+  touch-action: manipulation;
 }
 
 .back-btn:hover {
   background: var(--bg-subtle);
   color: var(--text-primary);
+}
+
+.back-btn:active {
+  transform: scale(0.96);
 }
 
 .category-title {
@@ -256,13 +289,14 @@ body {
   background: #ffffff;
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
-  padding: 10px 16px;
-  margin-bottom: 24px;
+  padding: 10px 14px;
+  margin-bottom: 20px;
 }
 
 .hint-card p {
   font-size: 0.85rem;
   color: var(--text-muted);
+  line-height: 1.5;
 }
 
 /* 卡片抽卡区域 */
@@ -270,17 +304,21 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 380px;
-  margin-bottom: 28px;
+  min-height: 420px;
+  margin-bottom: 24px;
   perspective: 1000px;
+  -webkit-perspective: 1000px;
 }
 
 .card-container {
-  width: 320px;
-  height: 420px;
+  width: min(330px, calc(100vw - 32px));
+  height: 430px;
+  max-height: calc(100dvh - 240px);
+  min-height: 380px;
   cursor: pointer;
   user-select: none;
-  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  touch-action: manipulation;
 }
 
 .card {
@@ -288,30 +326,34 @@ body {
   height: 100%;
   position: relative;
   transform-style: preserve-3d;
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-transform-style: preserve-3d;
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .card.flipped {
   transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
 }
 
 .card.drawing {
-  animation: cardDraw 0.5s ease;
+  animation: cardDraw 0.45s ease;
 }
 
 @keyframes cardDraw {
   0% { transform: scale(0.96); opacity: 0.8; }
-  50% { transform: scale(1.02); }
+  50% { transform: scale(1.01); }
   100% { transform: scale(1); opacity: 1; }
 }
 
 .card-front,
 .card-back {
   position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   border-radius: var(--radius);
   backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   box-shadow: var(--shadow-card);
   background: #ffffff;
   display: flex;
@@ -324,6 +366,8 @@ body {
   align-items: center;
   padding: 32px 20px;
   border: 1.5px dashed var(--border-dark);
+  transform: rotateY(0deg);
+  -webkit-transform: rotateY(0deg);
 }
 
 .card-emoji {
@@ -340,11 +384,14 @@ body {
 /* 卡片背面 - 纯白直观 */
 .card-back {
   transform: rotateY(180deg);
-  padding: 24px 22px;
+  -webkit-transform: rotateY(180deg);
+  padding: 22px 20px;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
   justify-content: space-between;
   align-items: stretch;
-  gap: 16px;
+  gap: 14px;
   border: 1px solid var(--border-dark);
 }
 
@@ -355,7 +402,7 @@ body {
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 8px 0;
+  padding: 6px 0;
 }
 
 .question-title {
@@ -407,6 +454,7 @@ body {
 
 .action-btn {
   padding: 12px 24px;
+  min-height: 48px;
   font-size: 0.95rem;
   font-weight: 600;
   border-radius: var(--radius);
@@ -414,9 +462,11 @@ body {
   transition: all 0.15s ease;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
   box-shadow: var(--shadow-sm);
   font-family: inherit;
+  touch-action: manipulation;
 }
 
 .redraw-btn {
@@ -427,6 +477,10 @@ body {
 
 .redraw-btn:hover {
   background: var(--bg-subtle);
+}
+
+.redraw-btn:active {
+  transform: scale(0.98);
 }
 
 .answer-btn {
@@ -440,10 +494,14 @@ body {
   border-color: var(--accent-hover);
 }
 
+.answer-btn:active {
+  transform: scale(0.98);
+}
+
 /* Toast 提示 */
 .toast {
   position: fixed;
-  bottom: 24px;
+  bottom: max(24px, env(safe-area-inset-bottom, 24px));
   left: 50%;
   transform: translateX(-50%) translateY(100px);
   background: var(--text-primary);
@@ -457,6 +515,7 @@ body {
   transition: all 0.25s ease;
   z-index: 1000;
   pointer-events: none;
+  white-space: nowrap;
 }
 
 .toast.show {
@@ -466,7 +525,7 @@ body {
 
 /* 极简滚动条 */
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 4px;
 }
 
 ::-webkit-scrollbar-track {
@@ -482,14 +541,26 @@ body {
   background: #9ca3af;
 }
 
-/* 移动端优化 */
+/* ===================================================
+   📱 移动端与不同屏幕适配优化
+   =================================================== */
+
 @media (max-width: 480px) {
   body {
     padding: 16px 12px;
+    padding-bottom: max(28px, env(safe-area-inset-bottom, 28px));
   }
 
   .title {
     font-size: 1.5rem;
+  }
+
+  .subtitle {
+    font-size: 0.88rem;
+  }
+
+  .intro-card {
+    padding: 16px 14px;
   }
 
   .categories-grid {
@@ -505,22 +576,74 @@ body {
     font-size: 1.75rem;
   }
 
+  .category-name {
+    font-size: 0.9rem;
+  }
+
+  .draw-area {
+    min-height: 380px;
+    margin-bottom: 20px;
+  }
+
   .card-container {
-    width: 290px;
-    height: 380px;
+    width: min(315px, calc(100vw - 24px));
+    height: 410px;
+  }
+
+  .card-back {
+    padding: 18px 16px;
+    gap: 12px;
   }
 
   .question-title {
     font-size: 1.05rem;
+    line-height: 1.55;
   }
 
   .action-buttons {
     flex-direction: column;
-    padding: 0 10px;
+    padding: 0 8px;
+    gap: 10px;
   }
 
   .action-btn {
     width: 100%;
-    justify-content: center;
+    min-height: 48px;
+  }
+}
+
+/* 短屏手机适配（如 iPhone SE、小尺寸屏幕） */
+@media (max-height: 680px) {
+  .draw-area {
+    min-height: 340px;
+    margin-bottom: 16px;
+  }
+
+  .card-container {
+    height: 360px;
+    min-height: 330px;
+  }
+
+  .card-front {
+    padding: 20px 16px;
+  }
+
+  .card-emoji {
+    font-size: 2.8rem;
+    margin-bottom: 8px;
+  }
+
+  .card-back {
+    padding: 16px 14px;
+    gap: 10px;
+  }
+
+  .question-title {
+    font-size: 0.98rem;
+    line-height: 1.5;
+  }
+
+  .hint-text {
+    font-size: 0.82rem;
   }
 }
