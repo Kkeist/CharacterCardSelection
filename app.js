@@ -21,6 +21,7 @@ class CardDrawApp {
   cacheElements() {
     this.mainPage = document.getElementById('main-page');
     this.drawPage = document.getElementById('draw-page');
+    this.fullPage = document.getElementById('full-page');
     this.categoriesGrid = document.getElementById('categories-grid');
     this.categoryTitle = document.getElementById('category-title');
     this.card = document.getElementById('card');
@@ -29,6 +30,7 @@ class CardDrawApp {
     this.hintText = document.getElementById('hint-text');
     this.cardSource = document.getElementById('card-source');
     this.backBtn = document.getElementById('back-btn');
+    this.fullBackBtn = document.getElementById('full-back-btn');
     this.redrawBtn = document.getElementById('redraw-btn');
     this.answerBtn = document.getElementById('answer-btn');
     this.randomAllBtn = document.getElementById('random-all-btn');
@@ -53,15 +55,24 @@ class CardDrawApp {
   }
 
   renderCategories() {
-    const html = QUESTIONS_DATA.categories.map(cat => `
+    const catsHtml = QUESTIONS_DATA.categories.map(cat => `
       <button type="button" class="category-card" data-category-id="${cat.id}">
         <span class="category-emoji">${cat.emoji}</span>
         <span class="category-name">${cat.name}</span>
         <span class="category-count">${cat.questions.length} 个问题</span>
       </button>
     `).join('');
-    
-    this.categoriesGrid.innerHTML = html;
+
+    // 最后一个格子：完整问卷
+    const fullCardHtml = `
+      <button type="button" class="category-card full-card" id="open-full-btn">
+        <span class="category-emoji">📖</span>
+        <span class="category-name">完整问卷</span>
+        <span class="category-count">查看与复制</span>
+      </button>
+    `;
+
+    this.categoriesGrid.innerHTML = catsHtml + fullCardHtml;
   }
 
   renderAllQuestionsPreview() {
@@ -93,10 +104,18 @@ class CardDrawApp {
   }
 
   bindEvents() {
-    // 分类卡片点击
+    // 分类网格点击代理（包含普通分类和最后一个完整问卷格子）
     this.categoriesGrid.addEventListener('click', (e) => {
+      const fullBtn = e.target.closest('#open-full-btn');
+      if (fullBtn) {
+        e.preventDefault();
+        e.stopPropagation();
+        this.openFullPage();
+        return;
+      }
+
       const card = e.target.closest('.category-card');
-      if (card) {
+      if (card && card.dataset.categoryId) {
         e.preventDefault();
         e.stopPropagation();
         const categoryId = card.dataset.categoryId;
@@ -110,7 +129,7 @@ class CardDrawApp {
       this.openRandomAll();
     });
 
-    // 复制全部问卷按钮
+    // 完整问卷页面：复制全部按钮
     if (this.copyAllBtn) {
       this.copyAllBtn.addEventListener('click', (e) => {
         e.preventDefault();
@@ -118,13 +137,21 @@ class CardDrawApp {
       });
     }
 
-    // 返回按钮
+    // 完整问卷页面：返回按钮
+    if (this.fullBackBtn) {
+      this.fullBackBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        this.goBackFromFullPage();
+      });
+    }
+
+    // 抽卡页面：返回按钮
     this.backBtn.addEventListener('click', (e) => {
       e.preventDefault();
       this.goBack();
     });
 
-    // 卡片点击翻转
+    // 抽卡页面：卡片点击翻转
     this.card.addEventListener('click', (e) => {
       e.preventDefault();
       if (!this.isFlipped) {
@@ -156,6 +183,10 @@ class CardDrawApp {
             this.drawNewCard();
           }
         }
+      } else if (this.fullPage && this.fullPage.classList.contains('active')) {
+        if (e.key === 'Escape') {
+          this.goBackFromFullPage();
+        }
       }
     });
   }
@@ -181,8 +212,21 @@ class CardDrawApp {
     this.drawNewCard();
   }
 
+  openFullPage() {
+    this.mainPage.classList.remove('active');
+    if (this.drawPage) this.drawPage.classList.remove('active');
+    this.fullPage.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  goBackFromFullPage() {
+    this.fullPage.classList.remove('active');
+    this.mainPage.classList.add('active');
+  }
+
   switchToDrawPage() {
     this.mainPage.classList.remove('active');
+    if (this.fullPage) this.fullPage.classList.remove('active');
     this.drawPage.classList.add('active');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }

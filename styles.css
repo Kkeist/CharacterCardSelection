@@ -91,7 +91,7 @@ body {
 
 /* 引导说明区域 */
 .intro-section {
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 .intro-card {
@@ -122,9 +122,37 @@ body {
   line-height: 1.55;
 }
 
+/* 随机全部按钮（置于分类之前） */
+.random-all-btn {
+  display: block;
+  width: 100%;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border: 1px solid var(--border-dark);
+  border-radius: var(--radius);
+  padding: 14px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.15s ease;
+  margin-bottom: 28px;
+  touch-action: manipulation;
+}
+
+.random-all-btn:hover {
+  background: var(--text-primary);
+  color: #ffffff;
+  border-color: var(--text-primary);
+}
+
+.random-all-btn:active {
+  transform: scale(0.99);
+}
+
 /* 分类选择区域 */
 .categories-section {
-  margin-bottom: 24px;
+  margin-bottom: 32px;
 }
 
 .section-title {
@@ -188,78 +216,38 @@ body {
   color: var(--text-muted);
 }
 
-/* 随机全部按钮 */
-.random-all-btn {
-  display: block;
-  width: 100%;
-  background: var(--bg-card);
-  color: var(--text-primary);
-  border: 1px solid var(--border-dark);
-  border-radius: var(--radius);
-  padding: 14px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: var(--shadow-sm);
-  transition: all 0.15s ease;
-  margin-bottom: 32px;
-  touch-action: manipulation;
+/* 最后一个格子：完整问卷特色样式 */
+.category-card.full-card {
+  border: 1.5px dashed var(--border-dark);
+  background: #fafafa;
 }
 
-.random-all-btn:hover {
-  background: var(--text-primary);
-  color: #ffffff;
+.category-card.full-card:hover {
+  background: #f4f4f5;
   border-color: var(--text-primary);
 }
 
-.random-all-btn:active {
-  transform: scale(0.99);
-}
-
 /* ===================================================
-   📖 完整问卷 Box 样式
+   📖 完整问卷独立页面 (#full-page)
    =================================================== */
-.all-questions-box {
+#full-page .all-questions-content {
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 22px;
+  padding: 24px 22px;
   box-shadow: var(--shadow-sm);
-  margin-bottom: 36px;
-}
-
-.all-questions-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--border);
-  gap: 12px;
-}
-
-.all-questions-title-area {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 22px;
+  margin-bottom: 28px;
 }
 
-.all-questions-title {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--text-primary);
-}
-
-.all-questions-subtitle {
-  font-size: 0.82rem;
-  color: var(--text-muted);
-}
-
-.copy-all-btn {
+.copy-all-top-btn {
   background: var(--text-primary);
   color: #ffffff;
   border: 1px solid var(--text-primary);
   border-radius: var(--radius-sm);
-  padding: 9px 16px;
+  padding: 8px 16px;
   font-size: 0.88rem;
   font-weight: 600;
   cursor: pointer;
@@ -269,25 +257,15 @@ body {
   gap: 6px;
   white-space: nowrap;
   touch-action: manipulation;
+  font-family: inherit;
 }
 
-.copy-all-btn:hover {
+.copy-all-top-btn:hover {
   background: var(--accent-hover);
 }
 
-.copy-all-btn:active {
-  transform: scale(0.97);
-}
-
-.all-questions-content {
-  margin-top: 18px;
-  max-height: 520px;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  padding-right: 8px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+.copy-all-top-btn:active {
+  transform: scale(0.96);
 }
 
 .all-cat-block {
@@ -317,8 +295,8 @@ body {
 .all-q-item {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  font-size: 0.9rem;
+  gap: 3px;
+  font-size: 0.92rem;
   line-height: 1.55;
 }
 
@@ -329,7 +307,7 @@ body {
 
 .all-q-hint {
   color: var(--text-muted);
-  font-size: 0.82rem;
+  font-size: 0.84rem;
   padding-left: 18px;
   line-height: 1.5;
 }
@@ -355,6 +333,7 @@ body {
   cursor: pointer;
   transition: all 0.15s ease;
   touch-action: manipulation;
+  font-family: inherit;
 }
 
 .back-btn:hover {
@@ -649,20 +628,8 @@ body {
     font-size: 0.9rem;
   }
 
-  .all-questions-box {
-    padding: 16px 14px;
-  }
-
-  .all-questions-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
-
-  .copy-all-btn {
-    width: 100%;
-    justify-content: center;
-    padding: 10px;
+  #full-page .all-questions-content {
+    padding: 18px 14px;
   }
 
   .draw-area {
@@ -697,7 +664,7 @@ body {
   }
 }
 
-/* 短屏手机适配（如 iPhone SE） */
+/* 短屏手机适配 */
 @media (max-height: 680px) {
   .draw-area {
     min-height: 340px;

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>深度角色问卷</title>
-  <link rel="stylesheet" href="styles.css?v=2.4">
+  <link rel="stylesheet" href="styles.css?v=2.5">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎴</text></svg>">
 </head>
 <body>
@@ -22,33 +22,33 @@
         </div>
       </section>
 
-      <section class="categories-section">
-        <h2 class="section-title">选择问卷分类</h2>
-        <div class="categories-grid" id="categories-grid">
-          <!-- 分类卡片将通过JS动态生成 -->
-        </div>
-      </section>
-
+      <!-- 随机抽取全部问题（置于分类之前） -->
       <button class="random-all-btn" id="random-all-btn">
         🎲 随机抽取全部问题
       </button>
 
-      <!-- 完整问卷 Box -->
-      <section class="all-questions-box">
-        <div class="all-questions-header">
-          <div class="all-questions-title-area">
-            <h3 class="all-questions-title">📖 完整问卷</h3>
-            <span class="all-questions-subtitle">共 11 个分类 · 77 个深度问题</span>
-          </div>
-          <button type="button" class="copy-all-btn" id="copy-all-btn">
-            📋 复制全部问卷
-          </button>
-        </div>
-        <div class="all-questions-content" id="all-questions-content">
-          <!-- 动态加载完整问卷格式化内容 -->
+      <section class="categories-section">
+        <h2 class="section-title">选择问卷分类</h2>
+        <div class="categories-grid" id="categories-grid">
+          <!-- 11个分类卡片 + 最后一个【完整问卷】卡片将通过JS生成 -->
         </div>
       </section>
     </main>
+
+    <!-- 完整问卷独立页面 -->
+    <div id="full-page" class="page">
+      <header class="draw-header">
+        <button class="back-btn" id="full-back-btn">← 返回</button>
+        <h2 class="category-title">📖 完整问卷</h2>
+        <button type="button" class="copy-all-top-btn" id="copy-all-btn">
+          📋 复制全部
+        </button>
+      </header>
+
+      <div class="all-questions-content" id="all-questions-content">
+        <!-- 动态加载完整问卷格式化内容 -->
+      </div>
+    </div>
 
     <!-- 抽卡页面 -->
     <div id="draw-page" class="page">
@@ -91,7 +91,7 @@
     </div>
   </div>
 
-  <script src="questions.js?v=2.4"></script>
-  <script src="app.js?v=2.4"></script>
+  <script src="questions.js?v=2.5"></script>
+  <script src="app.js?v=2.5"></script>
 </body>
 </html>
