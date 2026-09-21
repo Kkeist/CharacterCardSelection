@@ -1,7 +1,6 @@
 /* ===================================================
-   🎭 人类采访问卷 · 极简质朴白风格
+   🎭 深度角色问卷 · 极简质朴白风格
    Clean, Minimalist, Paper-like Aesthetic
-   Enhanced Mobile Adaptation
    =================================================== */
 
 :root {
@@ -35,7 +34,7 @@
   --shadow-card: 0 4px 16px rgba(0, 0, 0, 0.06);
 }
 
-/* 全局重置与移动端平滑渲染 */
+/* 全局重置与平滑渲染 */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -54,8 +53,8 @@ body {
   line-height: 1.6;
   min-height: 100vh;
   min-height: 100dvh;
-  padding: 20px 16px;
-  padding-bottom: max(32px, env(safe-area-inset-bottom, 32px));
+  padding: 24px 16px;
+  padding-bottom: max(36px, env(safe-area-inset-bottom, 36px));
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -76,24 +75,18 @@ body {
   display: block;
 }
 
-/* 头部设计 - 质朴克制 */
+/* 头部设计 */
 .header {
   text-align: center;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
   padding: 8px 0;
 }
 
 .title {
-  font-size: 1.75rem;
+  font-size: 1.85rem;
   font-weight: 700;
   color: var(--text-primary);
-  margin-bottom: 8px;
   letter-spacing: -0.5px;
-}
-
-.subtitle {
-  font-size: 0.95rem;
-  color: var(--text-muted);
 }
 
 /* 引导说明区域 */
@@ -109,39 +102,15 @@ body {
   box-shadow: var(--shadow-sm);
 }
 
-.intro-card h2 {
-  font-size: 1.05rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 12px;
-}
-
-.intro-card p {
-  font-size: 0.92rem;
+.intro-text {
+  font-size: 0.95rem;
   color: var(--text-secondary);
-  line-height: 1.65;
-  margin-bottom: 12px;
-}
-
-.intro-card .tip {
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-left: 3px solid #64748b;
-  border-radius: var(--radius-sm);
-  padding: 12px 14px;
-}
-
-.intro-card .notice {
-  background: #fafaf9;
-  border: 1px solid #e7e5e4;
-  border-left: 3px solid #78716c;
-  border-radius: var(--radius-sm);
-  padding: 12px 14px;
-  margin-bottom: 12px;
+  line-height: 1.7;
+  margin-bottom: 14px;
 }
 
 /* 作者注 - 诚恳温和的浅色便签 */
-.intro-card .author-note {
+.author-note {
   background: #fdfaf6;
   border: 1px solid #f2e9dc;
   border-left: 3px solid #d97706;
@@ -149,7 +118,7 @@ body {
   padding: 10px 14px;
   font-size: 0.88rem;
   color: #78350f;
-  margin-bottom: 0;
+  margin: 0;
   line-height: 1.55;
 }
 
@@ -233,7 +202,7 @@ body {
   cursor: pointer;
   box-shadow: var(--shadow-sm);
   transition: all 0.15s ease;
-  margin-bottom: 24px;
+  margin-bottom: 32px;
   touch-action: manipulation;
 }
 
@@ -247,11 +216,131 @@ body {
   transform: scale(0.99);
 }
 
-/* 抽卡页面头部 */
+/* ===================================================
+   📖 完整问卷 Box 样式
+   =================================================== */
+.all-questions-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 36px;
+}
+
+.all-questions-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  gap: 12px;
+}
+
+.all-questions-title-area {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.all-questions-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.all-questions-subtitle {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.copy-all-btn {
+  background: var(--text-primary);
+  color: #ffffff;
+  border: 1px solid var(--text-primary);
+  border-radius: var(--radius-sm);
+  padding: 9px 16px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  touch-action: manipulation;
+}
+
+.copy-all-btn:hover {
+  background: var(--accent-hover);
+}
+
+.copy-all-btn:active {
+  transform: scale(0.97);
+}
+
+.all-questions-content {
+  margin-top: 18px;
+  max-height: 520px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-right: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.all-cat-block {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.all-cat-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  background: var(--bg-subtle);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  display: inline-block;
+  align-self: flex-start;
+}
+
+.all-q-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-left: 4px;
+}
+
+.all-q-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.all-q-question {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.all-q-hint {
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  padding-left: 18px;
+  line-height: 1.5;
+}
+
+/* ===================================================
+   抽卡页面
+   =================================================== */
 .draw-header {
   display: flex;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
   gap: 12px;
 }
 
@@ -278,25 +367,10 @@ body {
 }
 
 .category-title {
-  font-size: 1.15rem;
-  font-weight: 600;
+  font-size: 1.2rem;
+  font-weight: 700;
   color: var(--text-primary);
   flex: 1;
-}
-
-/* 思考视角便签 */
-.hint-card {
-  background: #ffffff;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: 10px 14px;
-  margin-bottom: 20px;
-}
-
-.hint-card p {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  line-height: 1.5;
 }
 
 /* 卡片抽卡区域 */
@@ -305,7 +379,7 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 420px;
-  margin-bottom: 24px;
+  margin-bottom: 28px;
   perspective: 1000px;
   -webkit-perspective: 1000px;
 }
@@ -313,7 +387,7 @@ body {
 .card-container {
   width: min(330px, calc(100vw - 32px));
   height: 430px;
-  max-height: calc(100dvh - 240px);
+  max-height: calc(100dvh - 220px);
   min-height: 380px;
   cursor: pointer;
   user-select: none;
@@ -385,7 +459,7 @@ body {
 .card-back {
   transform: rotateY(180deg);
   -webkit-transform: rotateY(180deg);
-  padding: 22px 20px;
+  padding: 24px 22px;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior: contain;
@@ -542,9 +616,8 @@ body {
 }
 
 /* ===================================================
-   📱 移动端与不同屏幕适配优化
+   📱 移动端适配优化
    =================================================== */
-
 @media (max-width: 480px) {
   body {
     padding: 16px 12px;
@@ -553,10 +626,6 @@ body {
 
   .title {
     font-size: 1.5rem;
-  }
-
-  .subtitle {
-    font-size: 0.88rem;
   }
 
   .intro-card {
@@ -580,6 +649,22 @@ body {
     font-size: 0.9rem;
   }
 
+  .all-questions-box {
+    padding: 16px 14px;
+  }
+
+  .all-questions-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .copy-all-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 10px;
+  }
+
   .draw-area {
     min-height: 380px;
     margin-bottom: 20px;
@@ -591,7 +676,7 @@ body {
   }
 
   .card-back {
-    padding: 18px 16px;
+    padding: 20px 16px;
     gap: 12px;
   }
 
@@ -612,7 +697,7 @@ body {
   }
 }
 
-/* 短屏手机适配（如 iPhone SE、小尺寸屏幕） */
+/* 短屏手机适配（如 iPhone SE） */
 @media (max-height: 680px) {
   .draw-area {
     min-height: 340px;

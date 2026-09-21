@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>🎭 人类采访问卷 - 抽卡程序</title>
-  <link rel="stylesheet" href="styles.css?v=2.3">
+  <title>深度角色问卷</title>
+  <link rel="stylesheet" href="styles.css?v=2.4">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎴</text></svg>">
 </head>
 <body>
@@ -12,17 +12,13 @@
     <!-- 主页面 -->
     <main id="main-page" class="page active">
       <header class="header">
-        <h1 class="title">🎭 人类采访问卷</h1>
-        <p class="subtitle">自我探索与角色深度塑造 · 随机抽取与思考</p>
+        <h1 class="title">深度角色问卷</h1>
       </header>
 
       <section class="intro-section">
         <div class="intro-card">
-          <h2>📋 问卷指引与回答方向</h2>
-          <p>这是一份面向<strong>自我认知探索</strong>或<strong>角色（OC）深度塑造</strong>的人类采访问卷。比起平面的属性标签，真实的“活人感”往往深藏于具体情境、行动抉择与微妙情绪之中。</p>
-          <p class="tip">💡 <strong>思考建议：</strong>请多代入具体场景，关注面对境遇时的第一本能反应、真实言行与深层心理动机（回忆“真实做过的事”或设想“角色必然的选择”，比抽象的概念更具生命力）。</p>
-          <p class="notice">🎯 <strong>使用场景：</strong>无论用于自我复盘、创作取材、跑团人设补完，还是角色问答挑战，随机抽取一张卡片，开启深度的精神对话吧。</p>
-          <p class="author-note">✍️ <strong>作者注：</strong>全文纯手打，但是因为没有人称可能看起来累累的，请见谅；-；。。</p>
+          <p class="intro-text">这是一个也许能让你更加深刻探索了解自己，或者深度塑造角色的问卷。<br>你可以在其中抽取问题并回答填写，祝你的深度理解之旅顺利！</p>
+          <p class="author-note">✍️ 全文纯手打，但是因为没有人称可能看起来累累的，请见谅；-；。。</p>
         </div>
       </section>
 
@@ -36,6 +32,22 @@
       <button class="random-all-btn" id="random-all-btn">
         🎲 随机抽取全部问题
       </button>
+
+      <!-- 完整问卷 Box -->
+      <section class="all-questions-box">
+        <div class="all-questions-header">
+          <div class="all-questions-title-area">
+            <h3 class="all-questions-title">📖 完整问卷</h3>
+            <span class="all-questions-subtitle">共 11 个分类 · 77 个深度问题</span>
+          </div>
+          <button type="button" class="copy-all-btn" id="copy-all-btn">
+            📋 复制全部问卷
+          </button>
+        </div>
+        <div class="all-questions-content" id="all-questions-content">
+          <!-- 动态加载完整问卷格式化内容 -->
+        </div>
+      </section>
     </main>
 
     <!-- 抽卡页面 -->
@@ -44,10 +56,6 @@
         <button class="back-btn" id="back-btn">← 返回</button>
         <h2 class="category-title" id="category-title">分类名称</h2>
       </header>
-
-      <aside class="hint-card">
-        <p>📌 <strong>思考视角：</strong>真实情感 · 细节反应 · 行为动机 · 价值观与抉择</p>
-      </aside>
 
       <div class="draw-area">
         <div class="card-container" id="card-container">
@@ -83,7 +91,7 @@
     </div>
   </div>
 
-  <script src="questions.js?v=2.3"></script>
-  <script src="app.js?v=2.3"></script>
+  <script src="questions.js?v=2.4"></script>
+  <script src="app.js?v=2.4"></script>
 </body>
 </html>

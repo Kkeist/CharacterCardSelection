@@ -1,4 +1,4 @@
-// 🎴 抽卡程序主逻辑 - 极简纸白风格
+// 🎴 抽卡程序主逻辑 - 深度角色问卷
 
 class CardDrawApp {
   constructor() {
@@ -14,6 +14,7 @@ class CardDrawApp {
     this.cacheElements();
     this.buildAllQuestions();
     this.renderCategories();
+    this.renderAllQuestionsPreview();
     this.bindEvents();
   }
 
@@ -31,6 +32,8 @@ class CardDrawApp {
     this.redrawBtn = document.getElementById('redraw-btn');
     this.answerBtn = document.getElementById('answer-btn');
     this.randomAllBtn = document.getElementById('random-all-btn');
+    this.allQuestionsContent = document.getElementById('all-questions-content');
+    this.copyAllBtn = document.getElementById('copy-all-btn');
     this.toast = document.getElementById('toast');
   }
 
@@ -61,6 +64,34 @@ class CardDrawApp {
     this.categoriesGrid.innerHTML = html;
   }
 
+  renderAllQuestionsPreview() {
+    if (!this.allQuestionsContent) return;
+
+    const html = QUESTIONS_DATA.categories.map(cat => {
+      const qListHtml = cat.questions.map((q, idx) => {
+        const questionText = typeof q === 'object' ? q.question : q;
+        const hintText = (typeof q === 'object' && q.hint) ? q.hint : '';
+        return `
+          <div class="all-q-item">
+            <div class="all-q-question">${idx + 1}. ${questionText}</div>
+            ${hintText ? `<div class="all-q-hint">💡 提示：${hintText}</div>` : ''}
+          </div>
+        `;
+      }).join('');
+
+      return `
+        <div class="all-cat-block">
+          <div class="all-cat-title">${cat.emoji} ${cat.name} (${cat.questions.length})</div>
+          <div class="all-q-list">
+            ${qListHtml}
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    this.allQuestionsContent.innerHTML = html;
+  }
+
   bindEvents() {
     // 分类卡片点击
     this.categoriesGrid.addEventListener('click', (e) => {
@@ -78,6 +109,14 @@ class CardDrawApp {
       e.preventDefault();
       this.openRandomAll();
     });
+
+    // 复制全部问卷按钮
+    if (this.copyAllBtn) {
+      this.copyAllBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        this.copyAllQuestions();
+      });
+    }
 
     // 返回按钮
     this.backBtn.addEventListener('click', (e) => {
@@ -99,7 +138,7 @@ class CardDrawApp {
       this.drawNewCard();
     });
 
-    // 复制问题
+    // 复制当前问题
     this.answerBtn.addEventListener('click', (e) => {
       e.preventDefault();
       this.copyQuestion();
@@ -145,6 +184,7 @@ class CardDrawApp {
   switchToDrawPage() {
     this.mainPage.classList.remove('active');
     this.drawPage.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   goBack() {
@@ -189,12 +229,12 @@ class CardDrawApp {
       hint: hintText
     };
 
-    // 填充核心问题（直接呈现基础问题）
+    // 填充核心基础问题
     if (this.questionTitle) {
       this.questionTitle.textContent = questionText;
     }
 
-    // 填充提示内容
+    // 填充提示
     if (this.questionHintBox && this.hintText) {
       if (hintText && hintText.trim()) {
         this.questionHintBox.style.display = 'block';
@@ -213,7 +253,7 @@ class CardDrawApp {
       }
     }
 
-    // 抽卡轻动画
+    // 抽卡轻微动画
     this.card.classList.add('drawing');
     setTimeout(() => {
       this.card.classList.remove('drawing');
@@ -242,19 +282,46 @@ class CardDrawApp {
       textToCopy += `\n提示：${this.currentQuestion.hint}`;
     }
 
+    await this.copyText(textToCopy, '已复制当前问题到剪贴板');
+  }
+
+  async copyAllQuestions() {
+    let fullText = `# 深度角色问卷\n\n`;
+    fullText += `这是一个也许能让你更加深刻探索了解自己，或者深度塑造角色的问卷。\n`;
+    fullText += `你可以在其中抽取问题并回答填写，祝你的深度理解之旅顺利！\n\n`;
+    fullText += `（全文纯手打，但是因为没有人称可能看起来累累的，请见谅；-；。。）\n\n`;
+    fullText += `==============================\n\n`;
+
+    QUESTIONS_DATA.categories.forEach((cat) => {
+      fullText += `【${cat.emoji} ${cat.name}】\n`;
+      cat.questions.forEach((q, idx) => {
+        const questionText = typeof q === 'object' ? q.question : q;
+        const hintText = (typeof q === 'object' && q.hint) ? q.hint : '';
+        fullText += `${idx + 1}. ${questionText}\n`;
+        if (hintText) {
+          fullText += `   💡 提示：${hintText}\n`;
+        }
+      });
+      fullText += `\n`;
+    });
+
+    await this.copyText(fullText, '已复制全部问卷到剪贴板！');
+  }
+
+  async copyText(text, successMessage) {
     try {
-      await navigator.clipboard.writeText(textToCopy);
-      this.showToast('已复制到剪贴板');
+      await navigator.clipboard.writeText(text);
+      this.showToast(successMessage);
     } catch (err) {
       const textarea = document.createElement('textarea');
-      textarea.value = textToCopy;
+      textarea.value = text;
       textarea.style.position = 'fixed';
       textarea.style.opacity = '0';
       document.body.appendChild(textarea);
       textarea.select();
       document.execCommand('copy');
       document.body.removeChild(textarea);
-      this.showToast('已复制到剪贴板');
+      this.showToast(successMessage);
     }
   }
 
@@ -264,7 +331,7 @@ class CardDrawApp {
     
     setTimeout(() => {
       this.toast.classList.remove('show');
-    }, 2000);
+    }, 2200);
   }
 }
 
