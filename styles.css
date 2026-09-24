@@ -122,6 +122,61 @@ body {
   line-height: 1.55;
 }
 
+/* 哐哐工作室标注：头像在左，三行说明在右，整块左对齐；第二行和个人站链接连读成一句 */
+.kk-credit {
+  display: flex;
+  align-items: center;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  box-shadow: var(--shadow-sm);
+  font-size: 0.82rem;
+  line-height: 1.7;
+  color: var(--text-muted);
+  text-align: left;
+}
+
+.kk-credit-avatar {
+  flex: none;
+  width: 48px;
+  height: 48px;
+  margin-right: 12px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+}
+
+.kk-credit-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.kk-credit-text p {
+  margin: 0;
+}
+
+.kk-credit-same,
+.kk-credit-line {
+  display: inline;
+}
+
+.kk-credit-link {
+  position: relative;
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* 链接文字很小，用透明区域把可点范围放大到手指好点的大小 */
+.kk-credit-link::after {
+  content: '';
+  position: absolute;
+  top: -14px;
+  right: -8px;
+  bottom: -14px;
+  left: -8px;
+}
+
 /* 随机全部按钮（置于分类之前） */
 .random-all-btn {
   display: block;

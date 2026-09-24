@@ -39,6 +39,18 @@ test('构建产物自检通过，且不含内部文件、备份题库和图标�
   assert.ok(fs.existsSync(path.join(ROOT, OUT_DIR, '_headers')));
 });
 
+test('首页有一处哐哐工作室标注：三行文案、指向个人站的新窗口链接、头像随包发布', () => {
+  const html = read('index.html');
+  assert.equal((html.match(/class="kk-credit"/g) || []).length, 1, '标注只放一处');
+  for (const line of ['哐哐哐況 制作。', '全网同名，更多好玩的请前往→', '哐哐的个人站。']) {
+    assert.ok(html.includes(line), `缺少文案: ${line}`);
+  }
+  assert.match(html, /<a class="kk-credit-link" href="https:\/\/kb\.kkeist\.com\/" target="_blank" rel="noopener">/);
+  build();
+  assert.ok(fs.existsSync(path.join(ROOT, OUT_DIR, 'kk-avatar.png')), '头像没有进发布目录');
+  assert.match(read('index.html'), /src="kk-avatar\.png"/);
+});
+
 test('自检能拦住超大文件、内部文件、备份文件和缺失引用', () => {
   build();
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'cardsel-dist-'));

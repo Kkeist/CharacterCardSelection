@@ -20,6 +20,7 @@ const PUBLISH_FILES = [
   'apple-touch-icon.png',
   'icon-192.png',
   'icon-512.png',
+  'kk-avatar.png',
 ];
 const HEADERS_SOURCE = 'tools/_headers';
 const HEADERS_OUT = '_headers';
